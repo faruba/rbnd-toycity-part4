@@ -81,6 +81,7 @@ class Udacidata
         end
         is_eql
       }
+      raise ProductNotFoundError,"can't find product " if result == nil
 # how to Multiple Assignment ? 
 # `table , result`
 # will return an array
@@ -97,14 +98,16 @@ class Udacidata
     }
   end
   def self.find(id) 
-    Udacidata.find_by_id(id)
+    result = Udacidata.find_by_id(id)
+    raise ProductNotFoundError,"can't find product " if result == nil
+    result
   end
   Module::create_finder_methods("id", "brand", "name", "price")
   #["id", "brand", "name", "price"].each_with_index {|attr,idx|
   #  Udacidata.define_singleton_method("find_by_#{attr}".to_sym) { |value, is_as_arry = false|
   #    Udacidata.csv_helper { |csv|
   #      ret = create_by_data(csv.read.select{ |data| data[idx] ==  value.to_s })
-  #      if ret.length == 1 && !is_as_arry
+  #      if ret.length <= 1 && !is_as_arry
   #        ret = ret[0]
   #      end
   #      ret

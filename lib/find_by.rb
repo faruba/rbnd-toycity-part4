@@ -8,7 +8,7 @@ class Module
       str = "def self.find_by_#{attr_name}(value, is_as_arry = false)
         csv_helper { |csv|
           ret = create_by_data(csv.read.select{ |data| data[#{idx}] ==  value.to_s })
-          if ret.length == 1 && !is_as_arry
+          if ret.length <= 1 && !is_as_arry
             ret = ret[0]
           end
           ret
