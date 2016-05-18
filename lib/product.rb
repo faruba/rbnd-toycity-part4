@@ -24,12 +24,15 @@ class Product < Udacidata
     init_attr(opts)
     to_a
   end
+  def to_s
+    "Product:<id:#{@id}, brand:#{@brand}, name:#{name}, price:#{price}\n"
+  end
 private
 
   def init_attr(opts)
     @brand = opts[:brand]
     @name = opts[:name]
-    @price = opts[:price]
+    @price = opts[:price].to_f
   end
   # Reads the last line of the data file, and gets the id if one exists
   # If it exists, increment and use this value
