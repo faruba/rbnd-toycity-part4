@@ -99,18 +99,18 @@ class Udacidata
   def self.find(id) 
     Udacidata.find_by_id(id)
   end
-  
-  ["id", "brand", "name", "price"].each_with_index {|attr,idx|
-    Udacidata.define_singleton_method("find_by_#{attr}".to_sym) { |value, is_as_arry = false|
-      Udacidata.csv_helper { |csv|
-        ret = create_by_data(csv.read.select{ |data| data[idx] ==  value.to_s })
-        if ret.length == 1 && !is_as_arry
-          ret = ret[0]
-        end
-        ret
-      }
-    }
-  }
+  Module::create_finder_methods("id", "brand", "name", "price")
+  #["id", "brand", "name", "price"].each_with_index {|attr,idx|
+  #  Udacidata.define_singleton_method("find_by_#{attr}".to_sym) { |value, is_as_arry = false|
+  #    Udacidata.csv_helper { |csv|
+  #      ret = create_by_data(csv.read.select{ |data| data[idx] ==  value.to_s })
+  #      if ret.length == 1 && !is_as_arry
+  #        ret = ret[0]
+  #      end
+  #      ret
+  #    }
+  #  }
+  #}
 
   def self.where(opts)
     self.send("find_by_#{opts.keys[0]}".to_sym, opts.values[0], true)
