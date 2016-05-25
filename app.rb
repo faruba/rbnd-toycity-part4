@@ -132,5 +132,3 @@ puts "--------------------"
 print Analyzable::print_report(Product.all)
 puts
 
-path = File.dirname(__FILE__)+"/data/data.csv"
-File.delete(path)
